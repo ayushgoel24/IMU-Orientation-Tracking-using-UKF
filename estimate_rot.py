@@ -19,9 +19,9 @@ from ukf import UnscentedKalmanFilter
 
 def estimate_rot( data_num=1, load_vicon=False):
     #load data
-    imu = io.loadmat('imu/imuRaw'+str(data_num)+'.mat')
+    imu = io.loadmat( 'data/imu/imuRaw' + str( data_num ) + '.mat' )
     if load_vicon:
-        vicon = io.loadmat('vicon/viconRot'+str(data_num)+'.mat')
+        vicon = io.loadmat( 'data/vicon/viconRot' + str( data_num ) + '.mat' )
     accel = imu['vals'][0:3,:]
     gyro = imu['vals'][3:6,:]
     T = np.shape(imu['ts'])[1]
@@ -72,4 +72,4 @@ if __name__ == "__main__":
     logger.add( f"logs/{currentTime}/estimate_rot.log", format="{time} {level} {message}", level="DEBUG", backtrace=True, diagnose=True )
     logger.add( sys.stdout, format="<green>{time}</green> {level} <red>{message}</red>", level="INFO", colorize=True )
     initial_quaternion = Quaternion()
-    estimate_rot( load_vicon=False )
+    estimate_rot( load_vicon=True )
